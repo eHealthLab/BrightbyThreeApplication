@@ -1,0 +1,138 @@
+<!--
+* MothersMilk
+* Copyright (C) 2013 Regents of the University of Colorado.
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+-->
+<div class=well>
+
+    <p>
+        Por favor, introduzca la siguiente información para registrarse en la aplicación.
+    </p>
+
+    <div align="center">
+
+        <table>
+            <style type="text/css">
+                .errorClassSignUp{
+                    color: red;
+                }
+            </style>
+
+            <tr>
+                <td>
+                    <input type="text"
+                           placeholder="Introduzca el nombre"
+                           ng-model="newParticipant.firstName">
+                    </input>
+                </td>
+                <td class="errorClassSignUp">
+                    {{ signUpErrorFirstName }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="text"
+                           placeholder="Escriba última nombre"
+                           ng-model="newParticipant.lastName">
+                    </input>
+                </td>
+                <td class="errorClassSignUp">
+                    {{ signUpErrorLastName }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="email"
+                           placeholder="Introduce una dirección"
+                           ng-model="newParticipant.email">
+                    </input>
+                </td>
+                <td class="errorClassSignUp">
+                    {{ signUpErrorEmail }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="password"
+                           placeholder="Introduce el password"
+                           ng-model="newParticipant.password">
+                    </input>
+                </td>
+                <td class="errorClassSignUp">
+                    {{ signUpErrorPassword }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="password"
+                           placeholder="Confirmar contraseña"
+                           ng-model="newParticipant.passwordConfirm">
+                    </input>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="text"
+                           placeholder="Número de teléfono"
+                           ng-model="newParticipant.phoneNumber">
+                    </input>
+                </td>
+                <td class="errorClassSignUp">
+                    {{ signUpErrorPhoneNumber }}
+                </td>
+            </tr>
+
+        </table>
+
+        <h6><p  class="errorClassSignUp">{{ signUpErrorNotification }}</p></h6>
+
+    </div>
+
+    <div align="center" class="col-md-12">
+        <a class="calculate-button" href=""
+           ng-click="signupTry()">Regístrese</a>
+    </div>
+
+    <p align="center">
+        <b>OR</b>
+    </p>
+
+    <p>
+        Si usted ha firmado ya, tienes que identificarte.
+    </p>
+
+    <div align="center" class="col-md-12">
+
+        <a href="#/spanish/login" class="calculate-button"
+           data-ng-click="setMode(cbbConstants.modeMatrix)">
+            Login
+        </a>
+    </div>
+
+</div>
+
+<!--
+<button ng-click="addParticipant()" href="#/home">
+    Sign Up
+</button>
+
+-->
+

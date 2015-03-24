@@ -1,0 +1,149 @@
+<!--
+* MothersMilk
+* Copyright (C) 2013 Regents of the University of Colorado.
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+-->
+<div class=well>
+
+    <p>
+        Please enter the following information to sign up for the app.
+    </p>
+
+    <div align="center">
+
+        <table>
+            <style type="text/css">
+                .errorClassSignUp{
+                    color: red;
+                }
+            </style>
+
+            <tr>
+                <td>
+                    <input type="text"
+                           placeholder="Enter first name"
+                           ng-model="newParticipant.firstName">
+                    </input>
+                </td>
+                <!--
+                <td class="errorClassSignUp">
+                    {{ signUpErrorFirstName }}
+                </td>
+                -->
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="text"
+                           placeholder="Enter last name"
+                           ng-model="newParticipant.lastName">
+                    </input>
+                </td>
+                <!--
+                <td class="errorClassSignUp">
+                    {{ signUpErrorLastName }}
+                </td>
+                -->
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="email"
+                           placeholder="Enter email"
+                           ng-model="newParticipant.emailID">
+                    </input>
+                </td>
+                <!--
+                <td class="errorClassSignUp">
+                    {{ signUpErrorEmail }}
+                </td>
+                -->
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="password"
+                           placeholder="Enter password"
+                           ng-model="newParticipant.password1">
+                    </input>
+                </td>
+                <!--
+                <td class="errorClassSignUp">
+                    {{ signUpErrorPassword }}
+                </td>
+                -->
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="password"
+                           placeholder="Confirm password"
+                           ng-model="newParticipant.password2">
+                    </input>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="text"
+                           placeholder="Phone Number"
+                           ng-model="newParticipant.phoneNumber">
+                    </input>
+                </td>
+                <!--
+                <td class="errorClassSignUp">
+                    {{ signUpErrorPhoneNumber }}
+                </td>
+                -->
+            </tr>
+        </table>
+
+
+
+        <div align="center" class="col-md-12">
+            <a class="btn btn-primary" href=""
+               ng-click="signupTry()">Signup</a>
+        </div>
+
+    </div>
+
+    <p align="center">
+        <b>OR</b>
+    </p>
+
+    <p>
+        If you have signed up already, please login.
+    </p>
+
+    <div align="center" class="col-md-12">
+
+        <a href="#/login" class="btn btn-primary"
+           data-ng-click="setMode(cbbConstants.modeMatrix)">
+            Login
+        </a>
+    </div>
+
+
+
+</div>
+
+<!--
+<button ng-click="addParticipant()" href="#/home">
+    Sign Up
+</button>
+
+-->
+

@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<!--
+* MothersMilk
+* Copyright (C) 2013 Regents of the University of Colorado.
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+-->
+<html lang="en" ng-app="cbb" >
+
+<head>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" charset="utf-8"/>
+    <LINK REL="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <title>Bright by Three</title>
+
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/jquery-ui.min.js"></script>
+    <script src="lib/jquery.form.min.js"></script>
+    <script src="lib/highcharts.js"></script>
+    <script src="lib/exporting.js"></script>
+
+    <!-- order matters here, so be careful if you edit -->
+    <!-- bootstrap plugins - load after jquery -->
+
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-touch.js"></script>
+
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/ui-bootstrap-tpls-0.6.0.min.js"></script>
+    <!-- Angular.js scripts -->
+
+
+    <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.css" type="text/css" rel="stylesheet" />  -->
+
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-touch.js"></script>
+    <script src="lib/ng-grid-2.0.7.min.js"></script>
+    <script src="lib/ui-bootstrap-tpls-0.6.0.min.js"></script>
+    <script src="lib/highcharts-ng.js"></script>
+
+
+    <script src="js/app.js"></script>
+    <script src="js/services/matrixUtilities.js"></script>
+    <script src="js/services/studyDesignService.js"></script>
+    <script src="js/services/powerService.js"></script>
+    <script src="js/services/participantService.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/controllers/controllers.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover({
+                placement : 'bottom'
+            });
+        });
+    </script>
+
+    <!-- build:css css/glimmpse.css -->
+
+    <link href="data:text/css;charset=utf-8,"
+          data-href="css/bootstrap-theme.min.css"
+          rel="stylesheet" id="bs-theme-stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link type="text/css" rel="stylesheet" href="css/ng-grid.css">
+    <!-- endbuild -->
+
+
+    <link type="text/css" rel="stylesheet" href="css/mothersmilk.css">
+
+    <link type="text/css" rel="stylesheet" href="css/social-buttons.css">
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css">
+
+    <link href="css/bootstrap-social.css" rel="stylesheet" >
+    <!--<link type="text/css" rel="stylesheet" href="css/bb3.css">-->
+
+
+
+
+</head>
+
+<body>
+
+<div class="container" ng-controller="stateController">
+    <!-- header bar -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" style="margin-left: 60px
+                        ; margin-top: 10px">
+                <strong>Bright by Three</strong>
+            </a>
+        </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <!--<li class="active"><a href="#/index">Home</a></li>-->
+
+                    <li>
+                        <a style="margin-right: 10px" class="navbar-right pull-right"
+                           onclick="window.open('http://brightbythree.org',
+                            '_blank', 'location=yes');">
+                            <img src="images/BB3_logo-icon_WEB_rgb.png" width="40" height="56">
+                        </a>
+                    </li>
+
+                </ul>
+
+
+            </div>
+        </div>
+    </nav>
+        <!--
+        <a class="navbar-brand pull-right">
+            <label class="logo">&#160Bright by Three</label>
+        </a>
+        -->
+
+
+
+
+
+    <!-- Mode selection screen -->
+    <div class="well shaded-box" ng-show="!getLoginStatus()">
+
+        <!--<h4>Welcome to Bright by Three program</h4>-->
+        <table align="center">
+            <tr>
+                <td>
+
+                </td>
+                <td align="center">
+                    Please either login or signup to
+                    access your Bright by Three account.
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td>
+
+                </td>
+            </tr>
+        </table>
+
+        <div >
+            <div class="row vmargin15 hpadding0 box  gray-box rounded-box" style="border: 0;">
+                <div align="center" class="col-md-3 col-sm-3 col-xs-12">
+                    <table align="center">
+                        <tr align="center">
+                            <td align="center">
+
+                            </td>
+
+                            <td align="center">
+                                <a class="btn btn-lima btn-circle btn-xl"
+                                   data-toggle="modal"
+                                   data-target="#loginModal"
+                                        data-ng-click="setMode(cbbConstants.modeGuided)">
+                                    <i style="margin-top: 8px" class="glyphicon glyphicon-link">
+                                    </i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+
+                            </td>
+                            <td align="center">
+                                <b>Login</b>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="row vmargin15 hpadding0 box gray-box rounded-box"
+                 style="border: 0;">
+                <div align="center" class="col-md-3 col-sm-3 col-xs-12">
+                    <table align="center">
+                        <tr>
+                            <td align="center">
+
+                            </td>
+
+                            <td align="center">
+                                <a class="btn btn-juliet btn-circle btn-xl"
+                                   data-toggle="modal"
+                                   data-target="#signUpModal"
+                                   data-ng-click="setMode(cbbConstants.modeGuided)">
+                                    <i style="margin-top: 8px" class="glyphicon glyphicon-edit">
+                                    </i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+
+                            </td>
+                            <td align="center">
+                                <b>Signup</b>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- main Web application panel -->
+    <div class="well white-box shaded-box rounded-box" ng-show="getMode() != undefined">
+
+        <!-- toolbox menu -->
+
+        <!--
+        <div class="row hpadding30 hmargin15">
+            <div class="pull-left visible-sm visible-xs">
+                <a href="#/home" class="btn btn-sm btn-warning" ng-show="!isActive('/')">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    Back {{getLoginStatus()}}
+                </a>
+            </div>
+        </div>
+
+
+        <a class="button back" href="#/home" ng-show="getLoginStatus()">
+            Back
+        </a>
+        -->
+
+        <!-- ng-show="loginStatus != 'false'" -->
+
+        <div class="row hpadding30 hmargin15">
+            <div class="pull-right">
+
+            </div>
+        </div>
+
+        <!-- main application page for mobile (small and extra small screens) -->
+        <div class="visible-sm visible-xs">
+            <div ng-view ng-class="slide" class="padding10"></div>
+        </div>
+
+        <!-- main application content-->
+        <div class="row hmargin5 padding0 visible-md visible-lg">
+
+            <!-- main content area with toolbar -->
+            <div class="col-md-9 visible-md visible-lg">
+                <div class="box rounded-box">
+                    <div class="padding10" ng-view=""></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- The processing dialog -->
+        <div class="modal fade" id="processingDialog" tabindex="-1"
+             role="dialog" aria-labelledby="processingDialogLabel" aria-hidden="{{showProcessing && false}}">
+            <div class="modal-dialog rounded-box white-box">
+                <div class="modal-body">
+                    <div class="processing">Processing</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="incompleteDialog" tabindex="-1"
+             role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog rounded-box white-box">
+                <div class="model-content">
+                    <div class="modal-header">
+                        <h3>Please Wait</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="processing rounded-box"
+                             ng-show="messageRetrieved == false">
+                            <label>Processing</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-warning" data-dismiss="modal" aria-hidden="true">OK</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="textModal" tabindex="-1"
+         role="dialog" aria-labelledby="textModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="well">
+                        <div class="text-left">
+                            <p class="white-shadow">
+                                <b>
+                                    MMM:
+                                </b>
+                                {{ participantService.message }}
+                            </p>
+                        </div>
+
+                        <div class="text-right" ng-show="getTextMessageInFlag() && getTextMessageInb()
+                && getTextMessageInb() != null">
+                            <p class="white-shadow"
+                               ng-show="getTextMessageInFlag() && getTextMessageInb()
+               && getTextMessageInb() != null">
+                                <b>
+                                    You:
+                                </b>
+                                {{ participantService.textMessage_inb }}
+                            </p>
+                        </div>
+
+                        <input type="text"  placeholder=" Limit is 250 character."
+                               ng-show="getTextMessageInFlag() && !getTextMessageInb()"
+                               maxlength="250"
+                               class="textBoxStyle" wrap="true"
+                               ng-model="newMessage1.message"
+                               value="Thank you for using MMMM.
+                            Please type your message below and hit the 'Submit' button.">
+                        <button class="btn btn-primary" ng-click="submitMessage()"
+                                ng-hide="" ng-show="getTextMessageInFlag() && !getTextMessageInb()">
+                            Send
+                        </button>
+
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal"
+                            aria-hidden="true">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div modal-show
+         class="modal fade" id="loginModal"
+         modal-visible="!getLoginStatus()"
+         tabindex="-1"
+         role="dialog" aria-labelledby="loginModal" aria-hidden="true"
+         ng-controller="personalInfoController">
+        <form id="loginForm" enctype="multipart/form-data"
+              name="emailDesignForm" method="post">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Login</h3>
+                        <label>Please enter your email id and password
+                            used to register with BB3.</label>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="alert alert-success" ng-show="getLoginStatus()">
+                            You are successfully logged in. Please close this window to access dashboard.
+                        </div>
+                        <div class="well">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input class="form-control" type="email"
+                                       placeholder="Enter your email id" name="email"
+                                       ng-model="emailID" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input class="form-control" type="password"
+                                       placeholder="Enter your password"
+                                       name="password" ng-model="password1" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="submitLoginInfo()"
+                                class="btn btn-mike" aria-hidden="true"
+                                ng-disabled="!emailDesignForm.$valid || getLoginStatus()">
+                            Login
+                        </button>
+                        <a class="btn btn-darkRed" href="#/index" data-dismiss="modal"
+                                aria-hidden="true" ng-show="!getLoginStatus()"
+                                >Cancel</a>
+                        <button class="btn btn-darkRed" data-dismiss="modal"
+                                aria-hidden="true"
+                                ng-show="getLoginStatus()"
+                                >Close</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- endModal -->
+
+    <!-- Modal -->
+    <div modal-show
+         class="modal fade" id="signUpModal"
+         modal-visible="!getLoginStatus()"
+         tabindex="-1"
+         role="dialog" aria-labelledby="loginModal" aria-hidden="true"
+         ng-controller="personalInfoController">
+        <form id="signupForm" enctype="multipart/form-data"
+              name="signupForm" method="post">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Sign up</h3>
+                        <label>Please enter the following information
+                            and hit Submit when done.</label>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="alert alert-success" ng-show="getLoginStatus()">
+                            You are successfully signed up. Please close this window to access dashboard.
+                        </div>
+                        <div class="well">
+                            <div class="form-group">
+                                <label for="inputFirstName"
+                                       class="col-lg-2 control-label">First Name</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="inputFirstName"
+                                           placeholder="enter your first name"
+                                           ng-model="newParticipant.firstName" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputLastName" class="col-lg-2 control-label">Last Name</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="inputLastName"
+                                           placeholder="enter your last name"
+                                           ng-model="newParticipant.lastName" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                                <div class="col-lg-10">
+                                    <input type="email" class="form-control" id="inputEmail"
+                                           placeholder="enter your email" ng-model="newParticipant.emailID">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputPassword1" class="col-lg-2 control-label">Password</label>
+                                <div class="col-lg-10">
+                                    <input type="password" class="form-control" id="inputPassword1"
+                                           placeholder="enter password"
+                                           ng-model="newParticipant.password1" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputPassword2" class="col-lg-2 control-label">Confirm Password</label>
+                                <div class="col-lg-10">
+                                    <input type="password" class="form-control" id="inputPassword2"
+                                           placeholder="reenter password"
+                                           ng-model="newParticipant.password2" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputPhoneNumber" class="col-lg-2 control-label">Phone Number</label>
+                                <div class="col-lg-10">
+                                    <input type="number" class="form-control" id="inputPhoneNumber"
+                                           placeholder="phone number"
+                                           ng-model="newParticipant.phoneNumber" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputBabyName" class="col-lg-2 control-label">Baby's Name</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="inputBabyName"
+                                           placeholder="enter your baby's name"
+                                           ng-model="newParticipant.babyName" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputBabyDOB" class="col-lg-2 control-label">Baby's date of birth</label>
+                                <div class="col-lg-10">
+                                    <input type="datetime-local" class="form-control" id="inputBabyDOB"
+                                           placeholder="enter your baby's date of birth"
+                                           ng-model="newParticipant.babyDOB" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputBabyGender" class="col-lg-2 control-label">
+                                    Baby's Gender</label>
+                                <div class="col-lg-10">
+                                    <select class="selectpicker" data-style="btn-primary"
+                                            id="inputBabyGender" ng-model="newParticipant.babyGender">
+                                        <option>Female</option>
+                                        <option>Male</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputzipcode" class="col-lg-2 control-label">Zipcode</label>
+                                <div class="col-lg-10">
+                                    <input type="number" class="form-control" id="inputzipcode"
+                                           placeholder="enter your zipcode"
+                                           ng-model="newParticipant.zipcode" required />
+                                </div>
+                            </div>
+
+                            <!--
+                            <div class="form-group">
+                                <label for="inputClinic" class="col-lg-2 control-label">
+                                    Clinic</label>
+                                <div class="col-lg-10">
+                                    <select class="selectpicker" data-style="btn-primary"
+                                            id="inputClinic" ng-model="newParticipant.clinic">
+                                        <option>ClinicA</option>
+                                        <option>ClinicB</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            -->
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="submitSignupInfo()"
+                                class="btn btn-mike" aria-hidden="true"
+                                ng-disabled="!signupForm.$valid">
+                            Submit
+                        </button>
+
+                        <button class="btn btn-darkRed" data-dismiss="modal"
+                                ng-click="designEmailSuccess = undefined"
+                                aria-hidden="true" ng-show="!getLoginStatus()"
+                                >Cancel</button>
+
+                        <button class="btn btn-darkRed" data-dismiss="modal"
+                                ng-click="designEmailSuccess = undefined"
+                                aria-hidden="true"
+                                ng-show="getLoginStatus()"
+
+                                >Close</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- endModal -->
+
+
+    <!-- footer -->
+    <!--
+    <div class="row">
+        <div class="col-md-12 text-center vmargin15">
+            <div>Copyright 2013 University of Colorado Denver. Mothers' Milk Messaging is
+                released under the
+                <a href="#" onclick="window.open('http://www.gnu.org/licenses/gpl-2.0.html', '_blank', 'location=yes')">
+                    GNU Public License version 2.0</a>.
+
+                Mothers Milk Messaging version 1.0 is funded by the Agency for
+                Healthcare Research and Quality (AHRQ) Department of Health
+                and Human Services Research Program Project for grant 5P01HS021138-03.
+            </div>
+        </div>
+    </div>
+    -->
+
+</div>
+<!--
+<script src="lib/angular.min.js"></script>
+<script src="lib/angular-touch.js"></script>
+<script src="lib/ng-grid-2.0.7.min.js"></script>
+<script src="lib/ui-bootstrap-tpls-0.6.0.min.js"></script>
+<script src="lib/highcharts-ng.js"></script>
+
+
+<script src="js/app.js"></script>
+<script src="js/services/matrixUtilities.js"></script>
+<script src="js/services/studyDesignService.js"></script>
+<script src="js/services/powerService.js"></script>
+<script src="js/services/participantService.js"></script>
+<script src="js/directives.js"></script>
+<script src="js/controllers/controllers.js"></script>
+
+-->
+
+<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+<!--<script type="text/javascript" charset="utf-8" src="jquery_1.5.2.min.js"></script>  -->
+<script type="text/javascript" src="PushNotification.js"></script>
+
+
+<script type="text/javascript">
+    var pushNotification;
+    var android_device_regid;
+    var ios_device_regid;
+
+    function onDeviceReady() {
+        $("#app-status-ul").append('<li>deviceready event received</li>');
+
+        document.addEventListener("backbutton", function(e)
+        {
+            $("#app-status-ul").append('<li>backbutton event received</li>');
+
+            if( $("#home").length > 0)
+            {
+                // call this to get a new token each time. don't call it to reuse existing token.
+                //pushNotification.unregister(successHandler, errorHandler);
+                e.preventDefault();
+                navigator.app.exitApp();
+            }
+            else
+            {
+                navigator.app.backHistory();
+            }
+        }, false);
+
+        try
+        {
+            pushNotification = window.plugins.pushNotification;
+            if (device.platform == 'android' || device.platform == 'Android') {
+                //alert('its an android');
+                $("#app-status-ul").append('<li>registering android</li>');
+                pushNotification.register(successHandler, errorHandler, {"senderID":"322549379605","ecb":"onNotificationGCM"});
+                //alert('done registering');
+
+                // required!
+            } else if (device.platform.toLowerCase() == 'ios' || device.platform == 'iOS'){
+                //alert('its an ios device');
+                $("#app-status-ul").append('<li>registering iOS</li>');
+                pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});        // required!
+            }
+            else {
+                ;
+            }
+        }
+        catch(err)
+        {
+            txt="There was an error on this page.\n\n";
+            txt+="Error description: " + err.message + "\n\n";
+            alert(txt);
+        }
+    }
+
+    // handle APNS notifications for iOS
+    function onNotificationAPN(e) {
+        if (e.alert) {
+            $("#app-status-ul").append('<li>push-notification: ' + e.alert + '</li>');
+            navigator.notification.alert(e.alert);
+            //alert('inside apnnoti: You have a new text message' + e.alert);
+        }
+
+        if (e.sound) {
+            var snd = new Media(e.sound);
+            snd.play();
+            alert('You have a new text message');
+        }
+
+        if (e.badge) {
+            pushNotification.setApplicationIconBadgeNumber(successHandler, e.badge);
+        }
+    }
+
+    // handle GCM notifications for Android
+    function onNotificationGCM(e) {
+        $("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
+
+        switch( e.event )
+        {
+            case 'registered':
+                if ( e.regid.length > 0 )
+                {
+                    //alert('inside notification function');
+                    $("#app-status-ul").append('<li>REGISTERED -> REGID:' + e.regid + "</li>");
+                    // Your GCM push server needs to know the regID before it can push to this device
+                    // here is where you might want to send it the regID for later use.
+                    console.log("regID = " + e.regid);
+                    //alert(e.regid);
+                    android_device_regid = e.regid;
+                }
+                break;
+
+            case 'message':
+                // if this flag is set, this notification happened while we were in the foreground.
+                // you might want to play a sound to get the user's attention, throw up a dialog, etc.
+                if (e.foreground)
+                {
+                    $("#app-status-ul").append('<li>--INLINE NOTIFICATION--' + '</li>');
+                    //alert('You have a new text message');
+                    // if the notification contains a soundname, play it.
+                    var my_media = new Media("/android_asset/www/"+e.soundname);
+                    my_media.play();
+                }
+                else
+                {        // otherwise we were launched because the user touched a notification in the notification tray.
+                    if (e.coldstart) {
+                        $("#app-status-ul").append('<li>--COLDSTART NOTIFICATION--' + '</li>');
+                        var my_media = new Media("/android_asset/www/"+e.soundname);
+                        my_media.play();
+                    }
+                    else {
+                        $("#app-status-ul").append('<li>--BACKGROUND NOTIFICATION--' + '</li>');
+                        var my_media = new Media("/android_asset/www/"+e.soundname);
+                        my_media.play();
+                    }
+                }
+
+                $("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
+                $("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
+                break;
+
+            case 'error':
+                $("#app-status-ul").append('<li>ERROR -> MSG:' + e.msg + '</li>');
+                break;
+
+            default:
+                $("#app-status-ul").append('<li>EVENT -> Unknown, an event was received and we do not know what it is</li>');
+                break;
+        }
+    }
+
+    function tokenHandler (result) {
+        //alert('inside token handler');
+        $("#app-status-ul").append('<li>token: '+ result +'</li>');
+        //alert('device id is:' + result);
+        ios_device_regid = result;
+        // Your iOS push server needs to know the token before it can push to this device
+        // here is where you might want to send it the token for later use.
+    }
+
+    function successHandler (result) {
+        $("#app-status-ul").append('<li>success:'+ result +'</li>');
+    }
+
+    function errorHandler (error) {
+        $("#app-status-ul").append('<li>error:'+ error +'</li>');
+    }
+
+    document.addEventListener('deviceready', onDeviceReady, true);
+
+</script>
+
+</body>
+</html>
